@@ -5,14 +5,27 @@ class Calculator
     static void Main(string[] args)
     {
         Console.WriteLine("Welcome to Console Calculator!");
+
         Console.Write("Enter first number: ");
-        double num1 = Convert.ToDouble(Console.ReadLine());
+        if (!double.TryParse(Console.ReadLine(), out double num1))
+        {
+            Console.WriteLine("Invalid input! Please enter a valid number.");
+            return;
+        }
 
         Console.Write("Enter operator (+, -, *, /): ");
-        char op = Convert.ToChar(Console.ReadLine());
+        if (!char.TryParse(Console.ReadLine(), out char op) || "+-*/".IndexOf(op) == -1)
+        {
+            Console.WriteLine("Invalid operator! Use +, -, *, or /.");
+            return;
+        }
 
         Console.Write("Enter second number: ");
-        double num2 = Convert.ToDouble(Console.ReadLine());
+        if (!double.TryParse(Console.ReadLine(), out double num2))
+        {
+            Console.WriteLine("Invalid input! Please enter a valid number.");
+            return;
+        }
 
         double result = 0;
 
@@ -38,9 +51,6 @@ class Calculator
                     return;
                 }
                 break;
-            default:
-                Console.WriteLine("Invalid operator!");
-                return;
         }
 
         Console.WriteLine($"Result: {num1} {op} {num2} = {result}");
